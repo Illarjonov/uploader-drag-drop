@@ -1,7 +1,7 @@
-import s from './App.module.css';
-import { DragDropContextUI } from './components/drag-n-drop/drag-drop-context-UI';
-import { Sidebar } from './components/sidebar/sidebar';
-import { Workarea } from './components/workarea/workarea';
+import s from './App.module.css'
+import { DragDropContextUI } from './components/drag-n-drop/drag-drop-context-UI'
+import { Sidebar } from './components/sidebar/sidebar'
+import { Workarea } from './components/workarea/workarea'
 
 function App() {
 

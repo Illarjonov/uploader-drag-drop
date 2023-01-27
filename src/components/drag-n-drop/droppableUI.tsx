@@ -2,7 +2,7 @@ import {
     Droppable,
     DroppableProvided,
     DroppableStateSnapshot,
-} from "react-beautiful-dnd";
+} from "react-beautiful-dnd"
 
 
 type DroppabaleType = {

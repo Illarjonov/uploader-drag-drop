@@ -1,5 +1,5 @@
-import { DragDropContext } from "react-beautiful-dnd";
-import React from "react";
+import { DragDropContext } from "react-beautiful-dnd"
+import React from "react"
 
 type OnDragEndType = {
     combine?: any,
