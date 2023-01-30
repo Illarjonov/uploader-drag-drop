@@ -13,13 +13,16 @@ export const Sidebar = () => {
         <DroppableDnD droppableId={'sidebar'} isDropDisabled={true}>
             <div className={s.sidebar}>
                 <div className={s.textContainer}>
-                <DraggableDnD name='text' index={0} >
-                    <div className={s.text}> {text ? text : 'Random text'} </div>
-                </DraggableDnD>
+                    <DraggableDnD name='text' index={0} >
+                        <div className={s.text}> {text ? text : 'Random text'} </div>
+                    </DraggableDnD>
                 </div>
 
                 <DraggableDnD name='image' index={1} >
-                    <img src={image ? image : altImage} className={s.image} />
+                    <img 
+                        src={image ? image : altImage}
+                        className={s.image}
+                        alt="image" />
                 </DraggableDnD>
             </div>
 

@@ -19,6 +19,6 @@ export const useOutsideClick = (callback: ()=> void) => {
             document.removeEventListener('mousedown', handleClickOutside)
             document.removeEventListener('keypress', onKeypress)
         }
-    }, [ref, close])
+    }, [ref])
     return ref
 }

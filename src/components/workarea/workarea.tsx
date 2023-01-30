@@ -34,17 +34,20 @@ export const Workarea = () => {
                             className={s.textarea} />}
                 </div>
                 <div className={s.imageBlock}>
-                    {changeImage && <>
-                        <img
-                            onClick={() => dispatch(setIsOpenModalImage(true))}
-                            src={image ? image : altImage}
-                            className={s.image} />
+                    {changeImage &&
                         <>
-                            {isOpenModalImage && <UploaderAndCropper
-                                setOpen={(value: boolean) => dispatch(setIsOpenModalImage(value))}
-                                setUploaderImage={(value: string) => dispatch(setImage(value))} />}
+                            <img
+                                onClick={() => dispatch(setIsOpenModalImage(true))}
+                                src={image ? image : altImage}
+                                alt="image"
+                                className={s.image} />
+                            <>
+                                {isOpenModalImage && <UploaderAndCropper
+                                    setOpen={(value: boolean) => dispatch(setIsOpenModalImage(value))}
+                                    setUploaderImage={(value: string) => dispatch(setImage(value))} />}
+                            </>
                         </>
-                    </>}
+                    }
                 </div>
             </div>
         </DroppableDnD>

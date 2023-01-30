@@ -62,14 +62,6 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
         )
     }
 
-    //  
-    function useDebounceEffect(fn: any, waitTime: any, deps: any) {
-        useEffect(() => {
-            const t = setTimeout(() => fn.apply(undefined, deps), waitTime)
-            return () => clearTimeout(t)
-        }, deps)
-    }
-
     //cut image
     function onImageLoad(e: any) {
         if (aspect) {
@@ -77,7 +69,15 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
             setCrop(centerAspectCrop(width, height, aspect))
         }
     }
-    // используется хук который применяет все вышеперечисленное на обрезание 
+    //cropped hooks
+    function useDebounceEffect(fn: () => void, waitTime: number, deps: [CropOption | undefined, number, number] | []) {
+        useEffect(() => {
+            // @ts-ignore: Unreachable code error
+            const t = setTimeout(() => fn.apply(undefined, deps), waitTime)
+            return () => clearTimeout(t)
+        }, deps)
+    }
+    // using crop hooks
     useDebounceEffect(
         async () => {
             if (
@@ -109,10 +109,10 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
     //         setAspect(acpectParam)
     //         setCrop(centerAspectCrop(width, height, acpectParam))
     //     }
-    // }``
-    //Отпправка фото на сервер
+    // }
+
+    //ref to blob, blob to base64 and setting to workarea
     function photoUploadHandler() {
-        //ref to blob, blob to base64 and setting to workarea
         previewCanvasRef.current.toBlob(
             (blob: any) => {
                 const reader = new FileReader()
@@ -128,7 +128,7 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
         )
     }
 
-    //функция приема файла 
+    //dropzone function
     const acceptFile = (files: any) => {
         const reader = new FileReader()
         if (files && files.length > 0) {
@@ -142,10 +142,8 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
         reader.onload = (readerEvent: any) => setImgSrc(readerEvent.target.result)
 
     }
-    // инпут файла при клике дефолтный, можно прикрутить к инпуту type='file', но это уже делает функция ниже
-    // const onSelectFile = e => acceptFile(e.target.files) 
 
-    // параметры для дроппера, используется для обертки дропзоны
+    // dropzone params
     const { getRootProps, getInputProps } = useDropzone({
         //drag and drop functionality
         maxFiles: 1,
