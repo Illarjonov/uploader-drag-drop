@@ -80,6 +80,10 @@
     /* width: 400px; */
 }
 
+.iconContainer {
+    cursor: pointer;
+}
+
 .croppedAvatarPreview {
     align-items: center;
     display: flex;
@@ -88,7 +92,7 @@
 .newAvatarWithButtons {
     display: flex;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: space-between;
     padding-top: 20px;
 }
 
@@ -105,7 +109,7 @@
 .newAvatarCover {
     border: 3px solid #fff;
     object-fit: contain;
-    width: 200px;
+    width: 180px;
     height: 100px;
     max-width: 20vh;
     max-height: 10vh;

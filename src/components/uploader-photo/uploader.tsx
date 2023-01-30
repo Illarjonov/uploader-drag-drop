@@ -23,8 +23,7 @@ type CropOption = {
 }
 
 export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) => {
-    //acpect (5/5, 16/9), use resize cropp zone
-    const acpectParam = 16 / 9
+    const acpectParam = 16 / 9 //acpect (5/5, 16/9), use resize cropp zone
     const [aspect, setAspect] = useState<number | undefined>(acpectParam)
 
     const [imgSrc, setImgSrc] = useState('') //dropper src
@@ -35,12 +34,9 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
     const [crop, setCrop] = useState<CropOption | undefined>(undefined)
     const [completedCrop, setCompletedCrop] = useState<CropOption | undefined>(undefined)
 
-    console.log(completedCrop, crop)
-    //zoom 
-    const scale = 1
-    //rotation
-    const rotate = 0
     //hardcode value for reuse components
+    const scale = 1  //zoom 
+    const rotate = 0 //rotation
 
     // close click outside hook
     const closeref = useOutsideClick(() => setOpen(false))
@@ -69,6 +65,7 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
             setCrop(centerAspectCrop(width, height, aspect))
         }
     }
+
     //cropped hooks
     function useDebounceEffect(fn: () => void, waitTime: number, deps: [CropOption | undefined, number, number] | []) {
         useEffect(() => {
@@ -77,6 +74,7 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
             return () => clearTimeout(t)
         }, deps)
     }
+
     // using crop hooks
     useDebounceEffect(
         async () => {
@@ -140,7 +138,6 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
             reader.readAsDataURL(files[0])
         }
         reader.onload = (readerEvent: any) => setImgSrc(readerEvent.target.result)
-
     }
 
     // dropzone params
@@ -160,7 +157,7 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
         <div className={styles.avatarRelative}>
             <div className={styles.avatarModal} ref={closeref}>    {/* closeref => close click outside hook*/}
                 <div className={styles.closeBlock}>
-                    <div onClick={() => setOpen(false)} style={{ cursor: 'pointer' }}>
+                    <div onClick={() => setOpen(false)} className={styles.iconContainer}>
                         <CloseIcon />
                     </div>
                 </div>
@@ -169,8 +166,8 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
                         <div className={styles.cropperZone}>
                             <ReactCrop
                                 crop={crop}
-                                onChange={(percentCrop: any) => setCrop(percentCrop)}
-                                onComplete={(c: any) => setCompletedCrop(c)}
+                                onChange={(percentCrop: CropOption) => setCrop(percentCrop)}
+                                onComplete={(c: CropOption) => setCompletedCrop(c)}
                                 aspect={aspect}
                             >
                                 <img
@@ -214,8 +211,6 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
                         </div>
                     </div>
                 )}
-
-
             </div>
         </div>
     )

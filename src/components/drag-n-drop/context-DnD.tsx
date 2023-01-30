@@ -30,9 +30,7 @@ export const ContextDnD = ({children}: DragDropContextType) => {
             if (result.draggableId === "image") {
                 //show picture uploader
                 dispatch(setChangeImage(true))
-                dispatch(setIsOpenModalImage(true))
             }
-            console.log(result);
             return;
         }
     }
