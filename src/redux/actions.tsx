@@ -35,7 +35,7 @@ interface SetChangeText {
   type: ActionTypes.SET_CHANGE_TEXT;
   payload: boolean;
 }
-const setChangeText = (payload: boolean): SetChangeText => {
+export const setChangeText = (payload: boolean): SetChangeText => {
   return {
     type: ActionTypes.SET_CHANGE_TEXT,
     payload: payload
@@ -46,7 +46,7 @@ interface SetChangeImage {
   type: ActionTypes.SET_CHANGE_IMAGE;
   payload: boolean;
 }
-const setChangeImage = (payload: boolean): SetChangeImage => {
+export const setChangeImage = (payload: boolean): SetChangeImage => {
   return {
     type: ActionTypes.SET_CHANGE_IMAGE,
     payload: payload

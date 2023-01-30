@@ -1,5 +1,8 @@
 import { DragDropContext } from "react-beautiful-dnd"
 import React from "react"
+import store from "../../redux/store"
+import { useDispatch } from "react-redux"
+import { setChangeText } from '../../redux/actions'
 
 type OnDragEndType = {
     combine?: any,
@@ -15,12 +18,15 @@ type DragDropContextType = {
     children?: React.ReactNode;
 }
 
-export const DragDropContextUI = ({children}: DragDropContextType) => {
+export const ContextDnD = ({children}: DragDropContextType) => {
+    const dispatch = useDispatch()
+
     const onDragEnd = (result: OnDragEndType) => {
         // if drop to workarea
         if (result?.destination?.droppableId === 'workarea') {
             if (result.draggableId === "text") {
-                //show textarea
+                // store.dispatch(setChangeText(true))
+                dispatch(setChangeText(true))
             }
             if (result.draggableId === "image") {
                 //show picture uploader

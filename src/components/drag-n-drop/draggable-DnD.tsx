@@ -10,7 +10,7 @@ type DraggbleType = {
     index: number;
 }
 
-export const DraggableUI = ({ name, index, children }: DraggbleType) => <>
+export const DraggableDnD = ({ name, index, children }: DraggbleType) => <>
     <Draggable key={name} draggableId={name} index={index}>
         {(provided: DraggableProvided | any, snapshot: DraggableStateSnapshot) => (
             <div style={{ margin: 10 }}

@@ -1,17 +1,17 @@
 import s from './App.module.css'
-import { DragDropContextUI } from './components/drag-n-drop/drag-drop-context-UI'
+import { ContextDnD } from './components/drag-n-drop/context-DnD'
 import { Sidebar } from './components/sidebar/sidebar'
 import { Workarea } from './components/workarea/workarea'
 
 function App() {
 
   return (
-    <DragDropContextUI>
+    <ContextDnD>
       <div className={s.App}>
         <Sidebar />
         <Workarea />
       </div>
-    </DragDropContextUI>
+    </ContextDnD>
   )
 }
 
