@@ -19,6 +19,7 @@
 
 .image {
     height: 210px;
+    cursor: pointer;
 }
 
 .textarea {

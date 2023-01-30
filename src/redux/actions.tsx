@@ -1,5 +1,3 @@
-import { AnyAction } from 'redux';
-
 export enum ActionTypes {
   SET_TEXT = 'SET_TEXT',
   SET_IMAGE = 'SET_IMAGE',

@@ -23,14 +23,14 @@ export const reducer = (state: initialStateI = initialState, action: Action): in
             return {
                 ...state,
                 image: action.payload,
-                changeImage: false,
+                // changeImage: false,
             }
         }
         case ActionTypes.SET_TEXT: {
             return {
                 ...state,
                 text: action.payload,
-                changeText: false,
+                // changeText: false,
             }
         }
         case ActionTypes.SET_CHANGE_IMAGE: {

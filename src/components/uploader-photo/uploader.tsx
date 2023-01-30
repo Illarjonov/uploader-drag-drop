@@ -14,27 +14,39 @@ type CropperType = {
     setUploaderImage: (value: any) => void;
 }
 
+type CropOption = {
+    height: number;
+    unit: "%" | "px";
+    width: number;
+    x: number;
+    y: number;
+}
 
 export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) => {
-    const [imgSrc, setImgSrc] = useState('')
-    const [crop, setCrop] = useState<any>()
-    const imgRef = useRef<any>(null)
-    const [completedCrop, setCompletedCrop] = useState<any>()
-    //расширение (5/5, 16/9), может пригодится для переиспользования
+    //acpect (5/5, 16/9), use resize cropp zone
     const acpectParam = 16 / 9
-    const [aspect, setAspect] = useState<any>(acpectParam)
-    const previewCanvasRef = useRef<any>(null)
-    //увеличение 
-    const scale = 1
-    //поворот
-    const rotate = 0
-    //значения хардкод, но можно переиспользовать при нужде
+    const [aspect, setAspect] = useState<number | undefined>(acpectParam)
 
-    // для закрытия при клике вне
+    const [imgSrc, setImgSrc] = useState('') //dropper src
+
+    const imgRef = useRef<any>(null)
+    const previewCanvasRef = useRef<any>(null)
+
+    const [crop, setCrop] = useState<CropOption | undefined>(undefined)
+    const [completedCrop, setCompletedCrop] = useState<CropOption | undefined>(undefined)
+
+    console.log(completedCrop, crop)
+    //zoom 
+    const scale = 1
+    //rotation
+    const rotate = 0
+    //hardcode value for reuse components
+
+    // close click outside hook
     const closeref = useOutsideClick(() => setOpen(false))
 
-    // дефолтные настройки
-    function centerAspectCrop(mediaWidth: any, mediaHeight: any, aspect: any) {
+    // default options
+    function centerAspectCrop(mediaWidth: number, mediaHeight: number, aspect: number) {
         return centerCrop(
             makeAspectCrop(
                 {
@@ -50,7 +62,7 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
         )
     }
 
-    // хук для перемещения зоны кропа 
+    //  
     function useDebounceEffect(fn: any, waitTime: any, deps: any) {
         useEffect(() => {
             const t = setTimeout(() => fn.apply(undefined, deps), waitTime)
@@ -58,7 +70,7 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
         }, deps)
     }
 
-    //обрезание фото 
+    //cut image
     function onImageLoad(e: any) {
         if (aspect) {
             const { width, height } = e.currentTarget
@@ -88,16 +100,16 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
         [completedCrop, scale, rotate],
     )
 
-    //сетаем значения кроппера
-    function handleToggleAspectClick() {
-        if (aspect) {
-            setAspect(undefined)
-        } else if (imgRef.current) {
-            const { width, height } = imgRef.current
-            setAspect(acpectParam)
-            setCrop(centerAspectCrop(width, height, acpectParam))
-        }
-    }
+    // //set acpect
+    // function handleToggleAspectClick() {
+    //     if (aspect) {
+    //         setAspect(undefined)
+    //     } else if (imgRef.current) {
+    //         const { width, height } = imgRef.current
+    //         setAspect(acpectParam)
+    //         setCrop(centerAspectCrop(width, height, acpectParam))
+    //     }
+    // }``
     //Отпправка фото на сервер
     function photoUploadHandler() {
         //ref to blob, blob to base64 and setting to workarea
@@ -148,14 +160,14 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
 
     return (
         <div className={styles.avatarRelative}>
-            <div className={styles.avatarModal} ref={closeref}>    {/* Закрытие при клике вне поля кроппера*/}
+            <div className={styles.avatarModal} ref={closeref}>    {/* closeref => close click outside hook*/}
                 <div className={styles.closeBlock}>
                     <div onClick={() => setOpen(false)} style={{ cursor: 'pointer' }}>
                         <CloseIcon />
                     </div>
                 </div>
                 <div className={styles.photoBlock}>
-                    {!!imgSrc ? ( //загруженная img
+                    {!!imgSrc ? ( //dpopper img
                         <div className={styles.cropperZone}>
                             <ReactCrop
                                 crop={crop}
@@ -171,7 +183,7 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
                             </ReactCrop>
                         </div>
                     )
-                        : <div {...getRootProps()}> {/* Зона дропа фотки(rootProps), можно перенести в любое другое место*/}
+                        : <div {...getRootProps()}> {/* here dropzone*/}
                             <label htmlFor="profilePhotoUpload" className={styles.dropzone}>
                                 <div className={styles.initialPhoto}>
                                     <div className={styles.icon}> <CropperIcon /> </div>

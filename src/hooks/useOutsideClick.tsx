@@ -1,6 +1,5 @@
-import { useEffect } from "react";
-import { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect } from "react"
+import { useRef } from "react"
 
 export const useOutsideClick = (callback: ()=> void) => {
     const ref = useRef<any>()
@@ -20,6 +19,6 @@ export const useOutsideClick = (callback: ()=> void) => {
             document.removeEventListener('mousedown', handleClickOutside)
             document.removeEventListener('keypress', onKeypress)
         }
-    }, [ref])
+    }, [ref, close])
     return ref
 }

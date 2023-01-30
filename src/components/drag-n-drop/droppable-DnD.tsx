@@ -11,7 +11,7 @@ type DroppabaleType = {
     isDropDisabled?: boolean
 }
 
-export const DroppableDnD = ({ children, droppableId, isDropDisabled }: DroppabaleType) => <>
+export const DroppableDnD = ({ children, droppableId, isDropDisabled }:  DroppabaleType) => <>
     <Droppable droppableId={droppableId} isDropDisabled={isDropDisabled}>
         {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
             <div ref={provided.innerRef}>

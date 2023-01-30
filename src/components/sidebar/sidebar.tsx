@@ -2,22 +2,24 @@ import { useSelector } from "react-redux"
 import { initialStateI } from "../../redux/reducer"
 import { DraggableDnD } from "../drag-n-drop/draggable-DnD"
 import { DroppableDnD } from "../drag-n-drop/droppable-DnD"
-import altImage from '../../images/alt-image.jpeg'
+import altImage from '../../images/alt-image-sidebar.jpeg'
 import s from './sidebar.module.css'
 
 export const Sidebar = () => {
     const image = useSelector((state: initialStateI) => state.image)
+    const text = useSelector((state: initialStateI) => state.text)
 
     return (
         <DroppableDnD droppableId={'sidebar'} isDropDisabled={true}>
-
-            <div style={{ width: 300, height: 500, border: "1px solid #000" }}>
+            <div className={s.sidebar}>
+                <div className={s.textContainer}>
                 <DraggableDnD name='text' index={0} >
-                    <p> text </p>
+                    <div className={s.text}> {text ? text : 'Random text'} </div>
                 </DraggableDnD>
+                </div>
 
                 <DraggableDnD name='image' index={1} >
-                    <img src={image ? image : altImage} className={s.image}/>
+                    <img src={image ? image : altImage} className={s.image} />
                 </DraggableDnD>
             </div>
 
