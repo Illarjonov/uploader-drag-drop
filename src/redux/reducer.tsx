@@ -6,13 +6,15 @@ export interface initialStateI {
    image: string;
    changeText: boolean;
    changeImage: boolean;
+   isOpenModalImage: boolean
 }
 
 export const initialState: initialStateI | undefined = {
     text: '',
     image: '',
     changeText: false,
-    changeImage: false
+    changeImage: false,
+    isOpenModalImage: false
 }
 
 export const reducer = (state: initialStateI = initialState, action: Action): initialStateI => {
@@ -41,6 +43,12 @@ export const reducer = (state: initialStateI = initialState, action: Action): in
             return {
                 ...state,
                 changeText: action.payload,
+            }
+        }
+        case ActionTypes.SET_IS_OPEN_MODAL_IMAGE: {
+            return{
+                ...state,
+                isOpenModalImage: action.payload
             }
         }
         default:

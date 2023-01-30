@@ -1,8 +1,7 @@
 import { DragDropContext } from "react-beautiful-dnd"
 import React from "react"
-import store from "../../redux/store"
 import { useDispatch } from "react-redux"
-import { setChangeText } from '../../redux/actions'
+import { setChangeImage, setChangeText, setIsOpenModalImage } from '../../redux/actions'
 
 type OnDragEndType = {
     combine?: any,
@@ -30,6 +29,8 @@ export const ContextDnD = ({children}: DragDropContextType) => {
             }
             if (result.draggableId === "image") {
                 //show picture uploader
+                dispatch(setChangeImage(true))
+                dispatch(setIsOpenModalImage(true))
             }
             console.log(result);
             return;

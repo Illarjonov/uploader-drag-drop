@@ -5,6 +5,7 @@ export enum ActionTypes {
   SET_IMAGE = 'SET_IMAGE',
   SET_CHANGE_TEXT = 'SET_CHANGE_TEXT',
   SET_CHANGE_IMAGE = 'SET_CHANGE_IMAGE',
+  SET_IS_OPEN_MODAL_IMAGE = 'SET_IS_OPEN_MODAL_IMAGE'
 }
 
 
@@ -13,7 +14,7 @@ interface SetImage {
   type: ActionTypes.SET_IMAGE;
   payload: string;
 }
-const setImage = (image: string): SetImage => {
+export const setImage = (image: string): SetImage => {
   return {
     type: ActionTypes.SET_IMAGE,
     payload: image
@@ -24,7 +25,7 @@ interface SetText {
   type: ActionTypes.SET_TEXT;
   payload: string;
 }
-const setText = (text: string): SetText => {
+export const setText = (text: string): SetText => {
   return {
     type: ActionTypes.SET_TEXT,
     payload: text
@@ -53,8 +54,21 @@ export const setChangeImage = (payload: boolean): SetChangeImage => {
   }
 }
 
+interface SetIsOpenModalImage {
+  type: ActionTypes.SET_IS_OPEN_MODAL_IMAGE;
+  payload: boolean;
+}
+export const setIsOpenModalImage = (payload: boolean): SetIsOpenModalImage => {
+  return {
+    type: ActionTypes.SET_IS_OPEN_MODAL_IMAGE,
+    payload: payload
+  }
+}
 
-export type Action = SetText | SetImage | SetChangeText | SetChangeImage
+
+
+
+export type Action = SetText | SetImage | SetChangeText | SetChangeImage | SetIsOpenModalImage
 
 // interface MoreFetched {
 //   type: ActionTypes.MOREFETCHED;

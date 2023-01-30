@@ -1,7 +1,12 @@
+import { useSelector } from "react-redux"
+import { initialStateI } from "../../redux/reducer"
 import { DraggableDnD } from "../drag-n-drop/draggable-DnD"
 import { DroppableDnD } from "../drag-n-drop/droppable-DnD"
+import altImage from '../../images/alt-image.jpeg'
+import s from './sidebar.module.css'
 
 export const Sidebar = () => {
+    const image = useSelector((state: initialStateI) => state.image)
 
     return (
         <DroppableDnD droppableId={'sidebar'} isDropDisabled={true}>
@@ -12,7 +17,7 @@ export const Sidebar = () => {
                 </DraggableDnD>
 
                 <DraggableDnD name='image' index={1} >
-                    <p> image </p>
+                    <img src={image ? image : altImage} className={s.image}/>
                 </DraggableDnD>
             </div>
 
