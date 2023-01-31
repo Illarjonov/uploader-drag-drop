@@ -14,7 +14,7 @@ export const Sidebar = () => {
             <div className={s.sidebar}>
                 <div className={s.textContainer}>
                     <DraggableDnD name='text' index={0} >
-                        <div className={s.text}> {text ? text : 'Random text'} </div>
+                        <div className={s.text}> {text.trim().length > 0 ? text : 'Random text'} </div>
                     </DraggableDnD>
                 </div>
 
