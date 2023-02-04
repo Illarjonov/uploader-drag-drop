@@ -72,7 +72,7 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
             // @ts-ignore: Unreachable code error
             const t = setTimeout(() => fn.apply(undefined, deps), waitTime)
             return () => clearTimeout(t)
-        }, deps)
+        }, [deps, fn, waitTime])
     }
 
     // using crop hooks
@@ -83,7 +83,7 @@ export const UploaderAndCropper = ({ setOpen, setUploaderImage }: CropperType) =
                 completedCrop?.height &&
                 imgRef.current &&
                 previewCanvasRef.current
-            ) {
+            ) { 
                 // We use canvasPreview as it's much faster than imgPreview.
                 canvasPreview(
                     imgRef.current,

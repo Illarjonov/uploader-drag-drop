@@ -1,17 +1,18 @@
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 import { useRef } from "react"
 
-export const useOutsideClick = (callback: ()=> void) => {
-    const ref = useRef<any>()
-    const close = () =>  callback()
+//callback its close function
+export const useOutsideClick = (callback: () => void) => {
+    const ref = useRef<any>(null)
+    
+    const onKeypress = useCallback((e: any) => e.keyCode === 27 && callback(), [callback])
+
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
             if (!ref?.current?.contains(event.target)) {
-                close()
+                callback()
             }
         }
-
-        const onKeypress = (e: any) => e.keyCode === 27 && close()
 
         document.addEventListener('keypress', onKeypress)
         document.addEventListener('mousedown', handleClickOutside)
@@ -19,6 +20,6 @@ export const useOutsideClick = (callback: ()=> void) => {
             document.removeEventListener('mousedown', handleClickOutside)
             document.removeEventListener('keypress', onKeypress)
         }
-    }, [ref])
+    }, [ref, onKeypress, callback])
     return ref
 }
